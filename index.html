@@ -1,0 +1,308 @@
+<title>AI 泡沫观测站</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --bg: #f2f4f6;
+    --surface: #ffffff;
+    --surface2: #e9edf1;
+    --ink: #1a2330;
+    --ink2: #55637a;
+    --line: #d5dce4;
+    --accent: #33567e;
+    --good: #1e7a4f;
+    --warn: #b07a10;
+    --bad: #b03a2e;
+    --bad-bg: #f7e9e7;
+    --good-bg: #e5f2ea;
+    --warn-bg: #f7f0dd;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #12161c;
+      --surface: #1a2029;
+      --surface2: #222a35;
+      --ink: #e4e9ef;
+      --ink2: #94a1b3;
+      --line: #2e3947;
+      --accent: #7ea4cf;
+      --good: #4fbd85;
+      --warn: #d9a53f;
+      --bad: #e07264;
+      --bad-bg: #3a2622;
+      --good-bg: #1d3328;
+      --warn-bg: #38301c;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #12161c;
+    --surface: #1a2029;
+    --surface2: #222a35;
+    --ink: #e4e9ef;
+    --ink2: #94a1b3;
+    --line: #2e3947;
+    --accent: #7ea4cf;
+    --good: #4fbd85;
+    --warn: #d9a53f;
+    --bad: #e07264;
+    --bad-bg: #3a2622;
+    --good-bg: #1d3328;
+    --warn-bg: #38301c;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    margin: 0;
+    padding: 32px 20px 64px;
+    line-height: 1.55;
+  }
+  .wrap { max-width: 1060px; margin: 0 auto; }
+  h1, h2, h3 { font-family: "Archivo", "IBM Plex Sans", "PingFang SC", sans-serif; text-wrap: balance; }
+  .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+
+  header { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 8px; }
+  header h1 { font-size: 26px; font-weight: 800; margin: 0; letter-spacing: -0.01em; }
+  .asof { font-family: "IBM Plex Mono", monospace; font-size: 13px; color: var(--ink2); }
+  .framework-note { font-size: 13px; color: var(--ink2); margin: 0 0 28px; max-width: 68ch; }
+  .framework-note a { color: var(--accent); }
+
+  .panic { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 24px; display: grid; grid-template-columns: minmax(180px, 240px) 1fr; gap: 28px; margin-bottom: 28px; }
+  @media (max-width: 700px) { .panic { grid-template-columns: 1fr; } }
+  .panic-num { display: flex; flex-direction: column; gap: 4px; }
+  .panic-num .label { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink2); font-weight: 600; }
+  .panic-num .value { font-family: "IBM Plex Mono", monospace; font-size: 64px; font-weight: 600; line-height: 1; }
+  .band { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; padding: 3px 10px; border-radius: 999px; width: fit-content; }
+  .delta { font-family: "IBM Plex Mono", monospace; font-size: 13px; color: var(--ink2); }
+  .components { display: flex; flex-direction: column; gap: 10px; }
+  .comp { display: grid; grid-template-columns: 150px 1fr 64px; gap: 12px; align-items: center; font-size: 13px; }
+  @media (max-width: 700px) { .comp { grid-template-columns: 110px 1fr 58px; } }
+  .comp .name { color: var(--ink2); }
+  .bar { height: 8px; background: var(--surface2); border-radius: 4px; overflow: hidden; }
+  .bar > i { display: block; height: 100%; border-radius: 4px; }
+  .comp .val { text-align: right; font-family: "IBM Plex Mono", monospace; color: var(--ink2); }
+
+  .scale { display: flex; gap: 2px; margin-top: 14px; }
+  .scale span { flex: 1; height: 4px; border-radius: 2px; opacity: 0.35; }
+  .scale span.on { opacity: 1; }
+
+  h2 { font-size: 15px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink2); font-weight: 700; margin: 32px 0 14px; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px; display: flex; flex-direction: column; gap: 10px; }
+  .card .top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+  .card h3 { margin: 0; font-size: 16px; font-weight: 700; }
+  .card .cat { font-size: 11px; color: var(--ink2); letter-spacing: 0.08em; text-transform: uppercase; }
+  .score { font-family: "IBM Plex Mono", monospace; font-size: 30px; font-weight: 600; line-height: 1; }
+  .score small { font-size: 13px; color: var(--ink2); font-weight: 400; }
+  .meter { height: 6px; background: var(--surface2); border-radius: 3px; overflow: hidden; }
+  .meter > i { display: block; height: 100%; border-radius: 3px; }
+  .facts { margin: 0; padding: 0; list-style: none; font-size: 12.5px; color: var(--ink2); display: flex; flex-direction: column; gap: 4px; }
+  .facts li { padding-left: 14px; position: relative; }
+  .facts li::before { content: ""; position: absolute; left: 0; top: 0.55em; width: 5px; height: 5px; border-radius: 50%; background: var(--line); }
+  .flag { font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 4px; width: fit-content; }
+  .flag.bad { color: var(--bad); background: var(--bad-bg); }
+  .flag.warn { color: var(--warn); background: var(--warn-bg); }
+  .flag.good { color: var(--good); background: var(--good-bg); }
+
+  .events { display: flex; flex-direction: column; gap: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .event { display: grid; grid-template-columns: 92px 84px 1fr; gap: 14px; padding: 12px 18px; border-bottom: 1px solid var(--line); font-size: 13.5px; align-items: baseline; }
+  .event:last-child { border-bottom: none; }
+  .event .date { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--ink2); }
+  .event .tag { font-size: 11px; font-weight: 700; letter-spacing: 0.06em; }
+  .event .tag.neg { color: var(--bad); }
+  .event .tag.pos { color: var(--good); }
+  .event .tag.neu { color: var(--ink2); }
+  .event a { color: inherit; text-decoration: none; }
+  .event a:hover { color: var(--accent); text-decoration: underline; }
+  .event a .src { color: var(--accent); font-size: 12px; white-space: nowrap; }
+  @media (max-width: 600px) { .event { grid-template-columns: 80px 1fr; } .event .tag { grid-column: 1; } }
+
+  .cal { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+  .cal .item { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; font-size: 13px; }
+  .cal .d { font-family: "IBM Plex Mono", monospace; font-weight: 600; color: var(--accent); font-size: 13px; }
+  .cal .item.hot .d { color: var(--bad); }
+  .cal p { margin: 4px 0 0; color: var(--ink2); }
+
+  footer { margin-top: 40px; font-size: 12px; color: var(--ink2); }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>AI 泡沫观测站</h1>
+    <span class="asof mono" id="asof"></span>
+  </header>
+  <p class="framework-note">框架源自 Ed Zitron《<a href="https://www.wheresyoured.at/what-happens-if-openai-dies/">What Happens if OpenAI Dies?</a>»：烧钱率、算力债务、循环融资、客户集中度、融资悬崖。健康分 0–100（越高越健康），恐慌指数 0–100（越高越恐慌）。每日更新。</p>
+
+  <section class="panic">
+    <div class="panic-num">
+      <span class="label">恐慌指数 Panic Index</span>
+      <span class="value" id="panic-value"></span>
+      <span class="band" id="panic-band"></span>
+      <span class="delta" id="panic-delta"></span>
+      <div class="scale" id="panic-scale"></div>
+    </div>
+    <div class="components" id="panic-components"></div>
+  </section>
+
+  <h2>实体健康分</h2>
+  <div class="grid" id="entities"></div>
+
+  <h2>C-level 财务 / 运营高管变动</h2>
+  <p class="framework-note" style="margin-bottom:14px">Zitron 框架的先行指标：放弃未 vested 股权提前离职的财务/运营高管是最强内部人信号。🔴 强负面 · 🟡 中性偏负 · 🟢 正面/承诺信号</p>
+  <div class="events" id="execs"></div>
+
+  <h2>事件账本（近 10 条）</h2>
+  <div class="events" id="events"></div>
+
+  <h2>关键日历</h2>
+  <div class="cal" id="calendar"></div>
+
+  <footer>数据来源：每日新闻扫描 + 公开报道，含大量未经审计的私有公司数字，误差大；仅为个人研究，不构成投资建议。状态文件：~/ai-bubble-tracker/data/state.json</footer>
+</div>
+
+<script>
+const DATA = {
+  asOf: "2026-09-01",
+  panic: {
+    value: 50,
+    prev: null,
+    components: [
+      { name: "前沿实验室融资压力", value: 19, max: 25 },
+      { name: "Neocloud / 芯片压力", value: 12, max: 20 },
+      { name: "Hyperscaler 撤退", value: 4, max: 20 },
+      { name: "循环融资暴露", value: 8, max: 15 },
+      { name: "市场 / 舆论情绪", value: 7, max: 20 }
+    ]
+  },
+  entities: [
+    { name: "OpenAI", cat: "前沿实验室", score: 36, prev: null,
+      flag: { text: "融资悬崖 + pre-IPO exodus", cls: "bad" },
+      facts: ["Run rate $40B（3月 $25B，增速放缓）", "2030 前累计烧钱预测上调至 $665B", "现金 ~$73B vs 2027 算力债务 $147B+", "COO+CRO+多位高管数日内出走，Brockman 收权"] },
+    { name: "Anthropic", cat: "前沿实验室", score: 66, prev: null,
+      flag: { text: "IPO 窗口 9–10 月", cls: "good" },
+      facts: ["Run rate $65B（7月底，YoY 7x，已超 OpenAI）", "CFO Rao 带队投资者教育，传 $2T 定价", "3 年算力承诺 ~$300B+ 是主要悬顶", "管理层稳定 — 与 OpenAI 形成对照"] },
+    { name: "SpaceX / xAI", cat: "Musk 生态", score: 50, prev: null,
+      flag: { text: "Starlink 现金牛 vs xAI 烧钱机", cls: "warn" },
+      facts: ["2026-02 合并（xAI $250B），6/12 IPO（发行价 $135）", "Starlink：$11.4B 收入、$4.4B 经营利润、10M+ 用户", "合并动机 = xAI 算力资本需求压垮独立资产负债表", "12 位 xAI 联创全部离开；股价上市后剧烈波动"] },
+    { name: "CoreWeave", cat: "Neocloud", score: 30, prev: null,
+      flag: { text: "高杠杆 + 单一客户", cls: "bad" },
+      facts: ["净债务/aEBITDA 6.71x；新债票息 9.75%", "单季净亏 $1.48B（纪录）；capex $35–39B", "50–70% 收入来自 OpenAI", "股价距 52 周高点 -43%"] },
+    { name: "Cerebras", cat: "芯片 / Neocloud", score: 36, prev: null,
+      flag: { text: "低透明度，误差大", cls: "warn" },
+      facts: ["OpenAI 合同 $20B+/3 年，含股权（循环）", "收入 50–70% 暴露于 OpenAI", "公开财务信息有限"] },
+    { name: "Azure AI", cat: "Hyperscaler 平台", score: 40, prev: null,
+      flag: { text: "OpenAI 集中度 70%", cls: "bad" },
+      facts: ["AI 收入 70% 来自 OpenAI（>7% 总收入）", "OpenAI '增量 $250B' 承诺 FY27 起兑现", "对手方风险即自身 AI 叙事风险"] },
+    { name: "Vertex AI", cat: "Hyperscaler 平台", score: 46, prev: null,
+      flag: { text: "循环融资敞口上升", cls: "warn" },
+      facts: ["母公司 FCF 转负，capex 高企", "为 Anthropic 5 个数据中心租约 backstop（~$35B 等效）", "自有 Gemini 需求分散了单一 lab 依赖"] },
+    { name: "Bedrock", cat: "Hyperscaler 平台", score: 42, prev: null,
+      flag: { text: "Anthropic 集中 + FCF 转负", cls: "warn" },
+      facts: ["母公司 FCF 转负；2026 capex ~$220B", "对 Anthropic 投资累计 $40B，回流为 AWS 收入", "旗舰模型即 Claude，集中度实质高"] }
+  ],
+  execMoves: [
+    { date: "2026-08-25", company: "Anthropic", who: "CFO Krishna Rao", dir: "STAY", sig: "🟢", read: "CFO 亲自带队 IPO 投资者教育（传 $2T 定价），无同级 churn", url: "https://www.cnbc.com/2026/08/14/open-ai-ipo-red-flag.html" },
+    { date: "2026-08-14", company: "OpenAI", who: "COO Brad Lightcap", dir: "OUT", sig: "🔴", read: "2018 年以 CFO 加入的最资深运营高管，pre-IPO 窗口离开", url: "https://www.benzinga.com/markets/tech/26/08/61121654/openai-coo-confirms-bittersweet-exit-has-new-venture-in-sight" },
+    { date: "2026-08-14", company: "OpenAI", who: "CRO Denise Dresser", dir: "OUT", sig: "🔴", read: "任期 <12 个月，放弃未 vested 股权 — 最强内部人信号", url: "https://www.axios.com/2026/08/14/openai-executive-greg-brockman-ipo" },
+    { date: "2026-08-14", company: "OpenAI", who: "CRO Dali Rajic（ex-Wiz 总裁/COO）", dir: "IN", sig: "🟡", read: "有同级继任部分对冲，但空降于 exodus 之中", url: "https://valueaddvc.com/pulse/openai-executive-exodus-pre-ipo-refresh-2026" },
+    { date: "2026-07-31", company: "xAI (SpaceX)", who: "CFO Mike Liberatore", dir: "OUT", sig: "🟡", read: "由 SpaceX CFO Johnsen 代管取代；12 位联创至此全部离开", url: "https://www.cfodive.com/news/xai-cfo-departs-information-reports-ipo/817238/" },
+    { date: "2026-02-11", company: "xAI (SpaceX)", who: "Shotwell / Nicolls / Johnsen", dir: "IN", sig: "🟡", read: "SpaceX 旧部 12 人接管 — 稳定运营但深化 Musk 单点风险", url: "https://www.kucoin.com/news/flash/elon-musk-reorganizes-xai-with-12-key-appointments-from-spacex-and-family-office" }
+  ],
+  events: [
+    { date: "2026-08-31", tag: "NEG", text: "SoftBank OpenAI 股权保证金贷款谈判停滞：目标已从 $10B 砍至 $6B，仅锁定 ~$5B", src: "Yahoo Finance", url: "https://finance.yahoo.com/markets/stocks/articles/softbank-attempt-6-billion-openai-042525869.html" },
+    { date: "2026-08-14", tag: "NEG", text: "OpenAI pre-IPO 高管 exodus：COO+CRO+多位高管数日内离开，Brockman 收权；CNBC 称 'huge red flag'", src: "CNBC", url: "https://www.cnbc.com/2026/08/14/open-ai-ipo-red-flag.html" },
+    { date: "2026-08-25", tag: "POS", text: "Anthropic CFO Rao 启动 IPO 投资者教育，部分投资人定价高至 $2T", src: "CNBC", url: "https://www.cnbc.com/2026/08/14/open-ai-ipo-red-flag.html" },
+    { date: "2026-08-20", tag: "NEU", text: "OpenAI CFO Friar 告知员工：IPO 目标 2027 年上市（6/8 已秘密递交 SEC，目标估值 $1T+）", src: "Tech Insider", url: "https://tech-insider.org/openai-ipo-850-billion-valuation-2026/" },
+    { date: "2026-08-17", tag: "POS", text: "Anthropic run rate 达 $65B（7 月底，YoY 7x）；IPO 预计 9–10 月，MS/GS/JPM 承销", src: "CNBC", url: "https://www.cnbc.com/2026/08/17/anthropic-says-annualized-revenue-climbed-to-65-billion-in-july.html" },
+    { date: "2026-08-19", tag: "NEG", text: "CoreWeave 新发 $3.5B senior notes（2032）+ $1B @9.75%（2031）；净债务/aEBITDA 6.71x，单季净亏 $1.48B", src: "Seeking Alpha", url: "https://seekingalpha.com/article/4935825-coreweave-stock-debt-is-high-but-backlog-could-drive-fy28-inflection" },
+    { date: "2026-08-15", tag: "NEG", text: "OpenAI 将 2030 前累计烧钱预测上调 $112B 至 $665B（训练+推理成本）", src: "MLQ.ai", url: "https://mlq.ai/news/openai-revises-projections-upward-with-112-billion-extra-cash-burn-by-2030/" },
+    { date: "2026-08-10", tag: "NEG", text: "Google 为 Anthropic 5 个数据中心租约提供 backstop，等效 ~$35B 贷款 — 循环融资信号", src: "TFTC", url: "https://www.tftc.io/softbank-20-billion-bond-openai-funding-gap" },
+    { date: "2026-08-01", tag: "NEG", text: "SoftBank $40B 过桥贷款 2027-03 到期；OpenAI 估值下跌或触发提前偿还", src: "TFTC", url: "https://www.tftc.io/softbank-20-billion-bond-openai-funding-gap" }
+  ],
+  calendar: [
+    { date: "2026-10-01", text: "SoftBank $10B 保证金贷款（ARM 抵押）到期", hot: true },
+    { date: "2026-09/10", text: "Anthropic IPO 窗口", hot: false },
+    { date: "2026-10 下旬", text: "MSFT / GOOGL / AMZN Q3 财报：capex、AI 收入、减值", hot: false },
+    { date: "2027-03", text: "SoftBank $40B 过桥贷款到期", hot: true },
+    { date: "2027", text: "OpenAI IPO 目标（CFO 口径）", hot: false }
+  ]
+};
+
+function bandOf(v) {
+  if (v <= 20) return { label: "平静", color: "var(--good)", bg: "var(--good-bg)" };
+  if (v <= 40) return { label: "不安", color: "var(--warn)", bg: "var(--warn-bg)" };
+  if (v <= 60) return { label: "紧张", color: "var(--warn)", bg: "var(--warn-bg)" };
+  if (v <= 80) return { label: "恐慌", color: "var(--bad)", bg: "var(--bad-bg)" };
+  return { label: "崩溃进行时", color: "var(--bad)", bg: "var(--bad-bg)" };
+}
+function scoreColor(s) {
+  if (s >= 60) return "var(--good)";
+  if (s >= 45) return "var(--warn)";
+  return "var(--bad)";
+}
+function deltaText(cur, prev) {
+  if (prev == null) return "首日基线";
+  const d = cur - prev;
+  if (d === 0) return "持平";
+  return (d > 0 ? "▲ +" : "▼ ") + d + " vs 前日";
+}
+
+document.getElementById("asof").textContent = "AS OF " + DATA.asOf;
+
+const p = DATA.panic, b = bandOf(p.value);
+document.getElementById("panic-value").textContent = p.value;
+document.getElementById("panic-value").style.color = b.color;
+const bandEl = document.getElementById("panic-band");
+bandEl.textContent = b.label;
+bandEl.style.color = b.color;
+bandEl.style.background = b.bg;
+document.getElementById("panic-delta").textContent = deltaText(p.value, p.prev);
+document.getElementById("panic-scale").innerHTML =
+  [10,30,50,70,90].map(mid => {
+    const c = bandOf(mid);
+    const on = p.value > mid - 10;
+    return `<span class="${on ? "on" : ""}" style="background:${c.color}"></span>`;
+  }).join("");
+document.getElementById("panic-components").innerHTML = p.components.map(c => {
+  const pct = Math.round(c.value / c.max * 100);
+  const col = pct >= 65 ? "var(--bad)" : pct >= 35 ? "var(--warn)" : "var(--good)";
+  return `<div class="comp"><span class="name">${c.name}</span><span class="bar"><i style="width:${pct}%;background:${col}"></i></span><span class="val">${c.value}/${c.max}</span></div>`;
+}).join("");
+
+document.getElementById("entities").innerHTML = DATA.entities.map(e => `
+  <div class="card">
+    <div class="top">
+      <div><h3>${e.name}</h3><span class="cat">${e.cat}</span></div>
+      <div style="text-align:right">
+        <div class="score" style="color:${scoreColor(e.score)}">${e.score}<small>/100</small></div>
+        <div class="delta">${deltaText(e.score, e.prev)}</div>
+      </div>
+    </div>
+    <div class="meter"><i style="width:${e.score}%;background:${scoreColor(e.score)}"></i></div>
+    <span class="flag ${e.flag.cls}">${e.flag.text}</span>
+    <ul class="facts">${e.facts.map(f => `<li>${f}</li>`).join("")}</ul>
+  </div>`).join("");
+
+document.getElementById("execs").innerHTML = DATA.execMoves.map(m => {
+  const cls = m.dir === "OUT" ? "neg" : m.dir === "IN" ? "neu" : "pos";
+  const body = `<strong>${m.company}</strong> · ${m.who} ${m.sig}<br><span style="color:var(--ink2);font-size:12.5px">${m.read}</span>`;
+  const content = m.url
+    ? `<a href="${m.url}" target="_blank" rel="noopener">${body} <span class="src">↗</span></a>`
+    : body;
+  return `<div class="event"><span class="date">${m.date}</span><span class="tag ${cls}">${m.dir}</span><span>${content}</span></div>`;
+}).join("");
+
+document.getElementById("events").innerHTML = DATA.events.slice(0, 10).map(ev => {
+  const cls = ev.tag === "NEG" ? "neg" : ev.tag === "POS" ? "pos" : "neu";
+  const content = ev.url
+    ? `<a href="${ev.url}" target="_blank" rel="noopener">${ev.text} <span class="src">${ev.src || "来源"} ↗</span></a>`
+    : ev.text;
+  return `<div class="event"><span class="date">${ev.date}</span><span class="tag ${cls}">${ev.tag}</span><span>${content}</span></div>`;
+}).join("");
+
+document.getElementById("calendar").innerHTML = DATA.calendar.map(c =>
+  `<div class="item${c.hot ? " hot" : ""}"><span class="d">${c.date}</span><p>${c.text}</p></div>`
+).join("");
+</script>
