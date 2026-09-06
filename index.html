@@ -164,41 +164,41 @@
 
 <script>
 const DATA = {
-  asOf: "2026-09-02",
+  asOf: "2026-09-06",
   panic: {
-    value: 50,
-    prev: 50,
+    value: 54,
+    prev: 53,
     components: [
-      { name: "前沿实验室融资压力", value: 15, max: 25 },
-      { name: "Neocloud / 芯片压力", value: 14, max: 20 },
+      { name: "前沿实验室融资压力", value: 17, max: 25 },
+      { name: "Neocloud / 芯片压力", value: 15, max: 20 },
       { name: "Hyperscaler 撤退", value: 2, max: 20 },
-      { name: "循环融资暴露", value: 10, max: 15 },
-      { name: "市场 / 舆论情绪", value: 9, max: 20 }
+      { name: "循环融资暴露", value: 11, max: 15 },
+      { name: "市场 / 舆论情绪", value: 10, max: 20 }
     ]
   },
   entities: [
-    { name: "OpenAI", cat: "前沿实验室", score: 38, prev: 36,
+    { name: "OpenAI", cat: "前沿实验室", score: 37, prev: 37,
       flag: { text: "融资悬崖 + pre-IPO exodus", cls: "bad" },
       facts: ["Run rate $40B（3月 $25B，增速放缓）", "2030 前累计烧钱预测上调至 $665B", "现金 ~$73B vs 2027 算力债务 $147B+", "SoftBank $10B 保证金贷款落地 → 10 月 tranche 可交付", "但该笔以 OpenAI 股权质押，估值下跌触发追加抵押"] },
-    { name: "Anthropic", cat: "前沿实验室", score: 70, prev: 66,
-      flag: { text: "季度调整后经营利润转正", cls: "good" },
-      facts: ["Q2 收入 $11.5B+（YoY 14x），调整后经营利润转正", "或于 9 月公开递交 IPO，目标 ~$2T、募资至多 $100B", "5 月轮 $65B @ $965B 投后", "3 年算力承诺 ~$300B+ 仍是主要悬顶"] },
-    { name: "SpaceX / xAI", cat: "Musk 生态", score: 42, prev: 50,
+    { name: "Anthropic", cat: "前沿实验室", score: 68, prev: 69,
+      flag: { text: "利润转正，但杠杆挪到表外", cls: "warn" },
+      facts: ["Q2 收入 $11.5B+（YoY 14x），调整后经营利润转正", "或于 9 月公开递交 IPO，目标 ~$2T、募资至多 $100B", "9/7 劳工节后公开递交，挂牌或在 9 月底–10 月初；累计已募 >$130B", "正敲定 $15B pre-IPO 信贷额度", "SPV 芯片租赁债约 $71B（表外杠杆，与账面利润转正并记）", "3 年算力承诺 ~$300B+ 仍是主要悬顶"] },
+    { name: "SpaceX / xAI", cat: "Musk 生态", score: 43, prev: 44,
       flag: { text: "xAI 单季吞掉 86% 的 capex", cls: "bad" },
-      facts: ["Q2：收入 $7.8B（+92%），净亏 $541M", "xAI capex $15.8B — 占公司总 capex 86%，环比翻倍", "连接分部 +$1.66B 被航天+AI 分部 −$1.8B 吞没", "财报后市值蒸发近 $1T；内部人准备减持", "对冲：孟菲斯数据中心向 Anthropic / Google 出租算力"] },
-    { name: "CoreWeave", cat: "Neocloud", score: 29, prev: 30,
+      facts: ["Q2：收入 $7.8B（+92%），净亏 $541M", "xAI capex $15.8B — 占公司总 capex 86%，环比翻倍", "连接分部 +$1.66B 被航天+AI 分部 −$1.8B 吞没", "财报后市值蒸发近 $1T；内部人准备减持", "对冲：孟菲斯数据中心向 Anthropic / Google 出租算力", "Google 付 $920M/月（~$11B/年），但 9/30 GPU 交付死线未达标可被立即终止", "两份大合同均可撤销（Anthropic 90 天通知）— backlog 不能按面值计价"] },
+    { name: "CoreWeave", cat: "Neocloud", score: 30, prev: 30,
       flag: { text: "高杠杆 + 单一客户", cls: "bad" },
-      facts: ["净债务/aEBITDA 6.71x；新债票息 9.75%", "利率敏感：+100bp ≈ 年息 +$350M，对照经营利润指引 $960M–1.15B", "单季净亏 $1.48B（纪录）；capex $35–39B", "50–70% 收入来自 OpenAI；$21M 内部人减持"] },
-    { name: "Cerebras", cat: "芯片 / Neocloud", score: 34, prev: 36,
+      facts: ["净债务/aEBITDA 6.71x；新债票息 9.75%", "利率敏感：+100bp ≈ 年息 +$350M，对照经营利润指引 $960M–1.15B", "单季净亏 $1.48B（纪录）；capex $35–39B", "净债务约 $30B，加权平均利率 9.0%；股价距 52 周高点 −43%", "50–70% 收入来自 OpenAI；$21M 内部人减持"] },
+    { name: "Cerebras", cat: "芯片 / Neocloud", score: 34, prev: 34,
       flag: { text: "客户 = 债权人 = 潜在股东", cls: "bad" },
       facts: ["OpenAI 于 2025-12 放贷 $1B，以 3300 万股认股权证担保", "OpenAI 合同 750MW / 2028 前 / $20B+", "2025 收入仅 $510M，IPO 估值 $23B（45x）", "S-1 已递交，Nasdaq 代码 CBRS，拟募 $3.5B"] },
-    { name: "Azure AI", cat: "Hyperscaler 平台", score: 43, prev: 40,
+    { name: "Azure AI", cat: "Hyperscaler 平台", score: 43, prev: 43,
       flag: { text: "OpenAI 集中度 70%", cls: "bad" },
       facts: ["Azure +43% YoY，云分部年收入首破 $100B", "$80B 订单因电力约束无法交付 = 需求真实", "AI 收入 70% 来自 OpenAI（>7% 总收入）", "OpenAI '增量 $250B' 承诺 FY27 起兑现"] },
-    { name: "Vertex AI", cat: "Hyperscaler 平台", score: 49, prev: 46,
+    { name: "Vertex AI", cat: "Hyperscaler 平台", score: 49, prev: 49,
       flag: { text: "循环融资敞口上升", cls: "warn" },
       facts: ["Google Cloud 季度收入 $20B，backlog $460B（半年翻倍）", "母公司 FCF 转负，2026 capex $205B", "为 Anthropic 5 个数据中心租约 backstop（~$35B 等效）", "Anthropic 转正改善了该敞口质量"] },
-    { name: "Bedrock", cat: "Hyperscaler 平台", score: 45, prev: 42,
+    { name: "Bedrock", cat: "Hyperscaler 平台", score: 45, prev: 45,
       flag: { text: "Anthropic 集中 + FCF 转负", cls: "warn" },
       facts: ["AWS $42.2B，+36.7% YoY — 连续第五季增速加快", "母公司 FCF 转负；2026 capex ~$200B", "对 Anthropic 投资累计 $40B，回流为 AWS 收入", "旗舰模型即 Claude，集中度实质高"] }
   ],
@@ -211,19 +211,20 @@ const DATA = {
     { date: "2026-02-11", company: "xAI (SpaceX)", who: "Shotwell / Nicolls / Johnsen", dir: "IN", sig: "🟡", read: "SpaceX 旧部 12 人接管 — 稳定运营但深化 Musk 单点风险", url: "https://www.kucoin.com/news/flash/elon-musk-reorganizes-xai-with-12-key-appointments-from-spacex-and-family-office" }
   ],
   events: [
+    { date: "2026-09-04", tag: "NEG", text: "Google 按 $920M/月（~$11B/年）购买 xAI 算力，但 SpaceX 面临 2026-09-30 GPU 交付死线 — 未按期交付 Google 可立即终止合同；与 Anthropic $40B+ 合同的 90 天终止条款同类，backlog 不可按面值计价", src: "Motley Fool", url: "https://www.fool.com/investing/2026/09/04/spacex-spent-184-billion-in-a-single-quarter-158-b/" },
+    { date: "2026-09-04", tag: "NEG", text: "2026 年内已有 $130B 的 AI 数据中心项目被阻止或延期；约束从资本转为电力与设备（变压器/开关柜/燃气轮机短缺，新项目延期 24–72 个月）— 压制 capex 兑现速度，同时延后减值时钟", src: "PR Newswire", url: "https://www.prnewswire.com/news-releases/130-billion-in-ai-data-centers-have-been-blocked-or-delayed-in-2026-302821568.html" },
+    { date: "2026-09-04", tag: "NEG", text: "Anthropic 通过 SPV 结构承担的芯片租赁债务约 $71B 浮出 — 表外/准表外杠杆，与账面「季度调整后经营利润转正」是两条独立的线", src: "GraniteShares", url: "https://graniteshares.com/research/anthropic-ipo-2026-explained-from-965-billion-to-a-possible-2-trillion-listing/" },
+    { date: "2026-09-03", tag: "NEG", text: "Anthropic 正敲定 $15B pre-IPO 信贷额度 — 私募估值 ~$965B、利润刚转正的公司在公开递交前先拉百亿级债务额度，说明现金消耗节奏未随利润转正而缓解", src: "Bloomberg", url: "https://www.bloomberg.com/news/articles/2026-09-03/anthropic-nears-finalizing-15-billion-pre-ipo-credit-facility" },
     { date: "2026-09-01", tag: "POS", text: "Anthropic 或于本月公开递交 IPO，目标估值 ~$2T、募资至多 $100B；Q2 收入 $11.5B+（YoY 14x），季度调整后经营利润转正", src: "Yahoo Finance", url: "https://finance.yahoo.com/technology/article/anthropic-could-publicly-file-ipo-paperwork-as-soon-as-this-month-192026244.html" },
     { date: "2026-08-28", tag: "NEG", text: "IREN 计提 $639M 矿机减值，股价 −6% — AI 相邻算力资产的首笔实质硬件减值，减值时钟开始走", src: "24/7 Wall St.", url: "https://247wallst.com/investing/2026/08/28/iren-falls-6-as-a-639m-mining-rig-writedown-overshadows-ai-cloud-growth-terawulf-eases/" },
     { date: "2026-08-28", tag: "NEG", text: "CoreWeave 债务担忧引发抛售；利率敏感度：新发债 +100bp ≈ 年息 +$350M，对照 FY26 经营利润指引仅 $960M–1.15B；另有 $21M 内部人减持", src: "TipRanks", url: "https://www.tipranks.com/news/catalyst/coreweave-sinks-as-debt-jitters-hit-ai-darling" },
     { date: "2026-08-27", tag: "NEG", text: "首笔关闭仅三周，SoftBank 再求第二笔 $10B OpenAI 质押贷款；年内 OpenAI 相关借款突破 $50B；另有 $5B ARM 质押贷款深度谈判中", src: "Value Add Pulse", url: "https://valueaddvc.com/pulse/softbank-second-10b-loan-openai-stake-2026" },
     { date: "2026-08-06", tag: "NEG", text: "SoftBank 完成 $10B 两年期保证金贷款（OpenAI 持股质押，GS/JPM/Mizuho/Apollo/SMBC）；条款含估值大跌时追加抵押或提前偿还 — 融资成功但引入反身性", src: "Bloomberg", url: "https://www.bloomberg.com/news/articles/2026-08-06/softbank-secures-10-billion-margin-loan-backed-by-openai-stake" },
-    { date: "2026-08-04", tag: "NEG", text: "SpaceX 首份上市后财报：收入 $7.8B（+92%）、净亏 $541M；xAI 单季 capex $15.8B（占总 capex 86%、环比翻倍、超预期 $2.7B）；市值蒸发近 $1T", src: "CNBC", url: "https://www.cnbc.com/2026/08/04/spacex-spcx-earnings-live-updates-q2-2026.html" },
-    { date: "2026-08-04", tag: "POS", text: "SpaceX 收入翻倍部分源于孟菲斯数据中心向 Anthropic 和 Google 出租算力 — 从算力消耗方转为算力出租方", src: "TechCrunch", url: "https://techcrunch.com/2026/08/04/spacex-doubles-revenues-on-anthropic-and-google-compute-deals-starlink-growth/" },
-    { date: "2026-08-04", tag: "POS", text: "需求侧全面加速：Azure +43%、云分部年收入首破 $100B、$80B 订单因电力受限交付不了；AWS +36.7%（连续第五季加速）；GCP backlog $460B（半年翻倍）", src: "The Register", url: "https://www.theregister.com/off-prem/2026/08/04/cloud-giants-pour-nearly_600b-into-capex-as-ai-demand-surges/5282679" },
-    { date: "2026-04-17", tag: "NEG", text: "Cerebras S-1 披露：OpenAI 于 2025-12 放贷 $1B，以 3300 万股认股权证担保；最大客户同时是债权人与潜在股东 — 教科书级 vendor financing", src: "Tech Insider", url: "https://tech-insider.org/cerebras-ipo-filing-510m-revenue-openai-deal-23b-valuation-2026/" },
-    { date: "2026-08-15", tag: "NEG", text: "OpenAI 将 2030 前累计烧钱预测上调 $112B 至 $665B（训练+推理成本）", src: "MLQ.ai", url: "https://mlq.ai/news/openai-revises-projections-upward-with-112-billion-extra-cash-burn-by-2030/" }
+    { date: "2026-08-04", tag: "NEG", text: "SpaceX 首份上市后财报：收入 $7.8B（+92%）、净亏 $541M；xAI 单季 capex $15.8B（占总 capex 86%、环比翻倍、超预期 $2.7B）；市值蒸发近 $1T", src: "CNBC", url: "https://www.cnbc.com/2026/08/04/spacex-spcx-earnings-live-updates-q2-2026.html" }
   ],
   calendar: [
-    { date: "2026-09", text: "Anthropic 或公开递交 IPO 文件（目标 ~$2T）", hot: true },
+    { date: "2026-09-07", text: "Anthropic 公开递交 IPO 文件（劳工节后；目标 ~$2T、募资至多 $100B，挂牌或在 9 月底–10 月初）", hot: true },
+    { date: "2026-09-30", text: "SpaceX 对 Google 的 GPU 交付死线 — 未达标 Google 可立即终止 $920M/月合同", hot: true },
     { date: "2026-10", text: "SoftBank 须向 OpenAI 支付剩余 $10B 投资 tranche（付款义务，非偿债；原日历的 10/1 ARM 贷款到期经查证不成立）", hot: true },
     { date: "2026-10 下旬", text: "MSFT / GOOGL / AMZN Q3 财报：折旧年限假设、首笔 GPU 减值", hot: false },
     { date: "2027-03", text: "SoftBank $40B 过桥贷款到期 — 真正的到期墙", hot: true },
