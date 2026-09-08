@@ -164,7 +164,7 @@
 
 <script>
 const DATA = {
-  asOf: "2026-09-08（09-07 无自动运行·手动补跑，覆盖 09-06→09-08）",
+  asOf: "2026-09-08 · 第二次扫描（09-07 无自动运行；覆盖 09-06→09-08，分数不变）",
   panic: {
     value: 58,
     prev: 54,
@@ -211,6 +211,7 @@ const DATA = {
     { date: "2026-02-11", company: "xAI (SpaceX)", who: "Shotwell / Nicolls / Johnsen", dir: "IN", sig: "🟡", read: "SpaceX 旧部 12 人接管 — 稳定运营但深化 Musk 单点风险", url: "https://www.kucoin.com/news/flash/elon-musk-reorganizes-xai-with-12-key-appointments-from-spacex-and-family-office" }
   ],
   events: [
+    { date: "2026-09-08", tag: "NEG", text: "Oracle FQ1'27（9/10 盘后）前瞻量化：RPO $638B 为 +363% YoY；但 FY26 自由现金流 −$23.7B（经营现金流 $32B 之下），FY27 预计仍需约 $40B 债+股融资，为大型 AI 合同预付硬件已达 $75B；对 OpenAI $300B/5 年合同的交付节奏与可服务性仍无指引 — OpenAI 最大的公开对手方本身是净现金流出方，靠信用市场滚动履约", src: "IG", url: "https://www.ig.com/uk/news-and-trade-ideas/oracle-q1-fy2027-earnings-preview--can-ai-cloud-growth-justify-i-260908" },
     { date: "2026-09-08", tag: "NEU", text: "SpaceX 9/9 解禁 319M 股 + 9/10 解禁 59.1M 股（~2.4% 流通股）；8/6 首批 911.5M 股解禁未崩（两日 +22%）。股价较发行价 $135 约 −8%（破发），距 6 月高点 −34%；Musk 48.4% 锁至 2027-06", src: "TipRanks", url: "https://www.tipranks.com/news/will-spacex-stock-spcx-rise-or-fall-after-tomorrows-lockup-retail-investors-make-a-bet" },
     { date: "2026-09-05", tag: "NEG", text: "Anthropic IPO 时间表整体后移：公开 S-1 从 9/7 当周推迟至 9 月下旬，roadshow ≥10 月中，挂牌目标 11 月中期选举前数日；口径是先关闭 $15B 循环信贷额度再开分析师会 — 债务额度排在股权定价之前", src: "Value Add Pulse", url: "https://valueaddvc.com/pulse/anthropic-ipo-timeline-shifts-mid-october-2026" },
     { date: "2026-09-04", tag: "NEU", text: "潜在 IPO 投资人向 Anthropic 索要 revenue per token / revenue per gigawatt 等单位经济指标 — 买方开始按算力单位定价，公开 S-1 若不给这些数字会被折价", src: "Crypto Briefing / The Information", url: "https://cryptobriefing.com/anthropic-ipo-investors-seek-detailed-financial-metrics-amid-transparency/" },
@@ -220,11 +221,10 @@ const DATA = {
     { date: "2026-09-04", tag: "NEG", text: "Anthropic 通过 SPV 结构承担的芯片租赁债务约 $71B 浮出 — 表外/准表外杠杆，与账面「季度调整后经营利润转正」是两条独立的线", src: "GraniteShares", url: "https://graniteshares.com/research/anthropic-ipo-2026-explained-from-965-billion-to-a-possible-2-trillion-listing/" },
     { date: "2026-09-03", tag: "NEG", text: "Anthropic 正敲定 $15B pre-IPO 信贷额度 — 私募估值 ~$965B、利润刚转正的公司在公开递交前先拉百亿级债务额度，说明现金消耗节奏未随利润转正而缓解", src: "Bloomberg", url: "https://www.bloomberg.com/news/articles/2026-09-03/anthropic-nears-finalizing-15-billion-pre-ipo-credit-facility" },
     { date: "2026-08-12", tag: "NEU", text: "补记 Cerebras Q2：GAAP 收入 $180.1M（低于预期）、净亏 $450.5M（$386.6M 为股权激励）；OpenAI 占当期收入 32%；RPO $25.4B 中 ~80% 来自 OpenAI 且 78% 两年后才确认；现金 $8.6B — 基线原记「S-1 阶段、$23B 估值」已过时，公司 5/14 已上市募 $5.55B", src: "Motley Fool", url: "https://www.fool.com/investing/2026/09/05/cerebras-has-a-usd25-4-billion-backlog-and-one-openai-agreement-is-behind-much-of-it/" },
-    { date: "2026-07-22", tag: "NEG", text: "补记：AMD 承诺未来对 Anthropic 作至多 $5B 有条件股权投资，同时 Anthropic 部署至多 2GW AMD MI450（首个 GW 2027 H1）— 供应商出资换客户采购自家芯片，与 NVIDIA-OpenAI、OpenAI-Cerebras 同构的股权换算力结构", src: "CNBC", url: "https://www.cnbc.com/2026/07/22/amd-anthropic-ai-chip-investment.html" }
   ],
   calendar: [
     { date: "2026-09-09/10", text: "SpaceX 解禁 319M + 59.1M 股（~2.4% 流通股）；股价已破发，看承接", hot: true },
-    { date: "2026-09-10", text: "Oracle FQ1'27 财报（盘后）— RPO $638B 中 $300B 为 OpenAI 5 年合同，OpenAI 算力债务链上最大的公开对手方检验点", hot: true },
+    { date: "2026-09-10", text: "Oracle FQ1'27 财报（盘后）— RPO $638B（+363% YoY）中 $300B 为 OpenAI 5 年合同；FY26 FCF −$23.7B、FY27 需再融资约 $40B，看 capex 与融资计划是否同时上调", hot: true },
     { date: "2026-09 下旬", text: "Anthropic 公开递交 S-1（自 9/7 推迟；前置条件：$15B 循环信贷额度关闭）→ roadshow ≥10 月中 → 挂牌目标 11 月中期选举前", hot: true },
     { date: "2026-09-30", text: "SpaceX 对 Google 的 GPU 交付死线 — 未达标 Google 可终止或按比例减付 $920M/月合同；基建团队已现裂缝", hot: true },
     { date: "2026-10", text: "SoftBank 须向 OpenAI 支付剩余 $10B 投资 tranche（付款义务，非偿债；原日历的 10/1 ARM 贷款到期经查证不成立）", hot: true },
