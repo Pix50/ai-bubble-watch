@@ -164,31 +164,31 @@
 
 <script>
 const DATA = {
-  asOf: "2026-09-11 · 本周期最大检验点落地：Oracle FQ1'27 全面超预期，RPO 升至 $664B 且新增 $30B AI 合同「未动用 Oracle 额外资本」；同日 SoftBank 提前六个月还清 $40B 过桥的 $25.9B 余额、改发高收益债。恐慌 59→56，开张以来首次单日下行超 1 分。缺口依旧：Oracle 仍未给 OpenAI $300B 合同的交付指引，且 FCF −$5.4B",
+  asOf: "2026-09-12 · 空白期：八组关键词零当期新事件，八个健康分全部持平。恐慌 56→57 的 +1 全部来自一条 6 月补记 — Apollo/Blackstone $35B TPU 售后回租 SPV 中，Broadcom 对 $30B 优先档提供残值担保，是账本第五例、也是唯一一例把供应商信用嵌进可交易私募信贷的结构。最值得盯的一条不计分：SoftBank 第二笔 $10B OpenAI 质押贷款报价 SOFR+275bp，对照首笔一手核实的 425bp",
   panic: {
-    value: 56,
-    prev: 59,
+    value: 57,
+    prev: 56,
     components: [
       { name: "前沿实验室融资压力", value: 18, max: 25 },
       { name: "Neocloud / 芯片压力", value: 14, max: 20 },
       { name: "Hyperscaler 撤退", value: 2, max: 20 },
-      { name: "循环融资暴露", value: 13, max: 15 },
+      { name: "循环融资暴露", value: 14, max: 15 },
       { name: "市场 / 舆论情绪", value: 9, max: 20 }
     ]
   },
   entities: [
-    { name: "OpenAI", cat: "前沿实验室", score: 38, prev: 37,
+    { name: "OpenAI", cat: "前沿实验室", score: 38, prev: 38,
       flag: { text: "融资悬崖 + pre-IPO exodus；但对手方与债主两条线同日改善", cls: "bad" },
       facts: ["<b>新：最大公开算力对手方 Oracle 交出加速答卷</b> — RPO $664B（+$209B YoY），OCI +121%，FY27 指引上调；新签 >$30B AI 合同明确「未动用 Oracle 额外资本」", "<b>新：SoftBank 9/15 提前还清 $40B 过桥的 $25.9B 余额</b>，2027-03 到期墙与「OpenAI 估值下跌触发提前偿还」的反身路径被主动拆除", "缺口未补：Oracle 仍未就 $300B/5 年合同给出任何交付节奏与可服务性指引", "Run rate $40B（3月 $25B，增速放缓）", "2030 前累计烧钱预测上调至 $665B；现金 ~$73B vs 2027 算力债务 $147B+", "2026 年内累计 14 位高管离职（含 8/26 数据中心负责人）；CFO 口径仍是 2027 上市"] },
     { name: "Anthropic", cat: "前沿实验室", score: 67, prev: 67,
-      flag: { text: "IPO 后移：债务额度排在股权定价前", cls: "warn" },
-      facts: ["Q2 收入 $11.5B+（YoY 14x），调整后经营利润转正", "IPO 时间表后移：公开 S-1 9/7→9 月下旬，roadshow ≥10 月中，挂牌目标 11 月中期选举前", "推迟原因：先关闭 $15B 循环信贷额度再开分析师会", "SPV 芯片租赁债约 $71B（表外杠杆，与账面利润转正并记）", "IPO 投资人索要 revenue per token / per GW — 买方按算力单位定价", "AMD 至多 $5B 有条件股权 ↔ 2GW MI450（股权换算力）", "3 年算力承诺 ~$300B+ 仍是主要悬顶；累计已募 >$130B"] },
-    { name: "SpaceX / xAI", cat: "Musk 生态", score: 44, prev: 45,
+      flag: { text: "表外杠杆的兜底方浮出：残值在 Broadcom，租金在 Google", cls: "warn" },
+      facts: ["<b>新：$35B TPU 售后回租 SPV 的完整结构浮出</b> — Apollo+Blackstone 于 6/5 完成，Senior A1 $6B + A2 $24B 由 <b>Broadcom 提供残值担保与信用背书</b>，Google 另行 backstop 五个 DC 的租金支付，对应 +1GW。Hock Tan 称共建「AI XPV Platform」，目标 2028 年前 >20GW — 这套结构准备被复制放大", "<b>新：$15B 循环额度是在原约 $2.5B 上扩大 6 倍</b>，银团 17 家银行（MS 领衔，GS/JPM/Citi 主要角色）；用途口径是「保险」不是增长资本 — 对冲静默期与算力账单撞车", "Q2 收入 $11.5B+（YoY 14x），调整后经营利润转正", "IPO 时间表后移：公开 S-1 9/7→9 月下旬，roadshow ≥10 月中，挂牌目标 11 月中期选举前", "SPV 芯片租赁债约 $71B（表外杠杆，与账面利润转正并记）", "IPO 投资人索要 revenue per token / per GW — 买方按算力单位定价", "AMD 至多 $5B 有条件股权 ↔ 2GW MI450（股权换算力）", "3 年算力承诺 ~$300B+ 仍是主要悬顶；累计已募 >$130B"] },
+    { name: "SpaceX / xAI", cat: "Musk 生态", score: 44, prev: 44,
       flag: { text: "算力斜率被锁定向上：1.4GW → 2027 年底 5–10GW", cls: "warn" },
       facts: ["<b>新：NVIDIA 既是大股东也是独家供应商</b> — 持 SPCX 1.228 亿股（源自 2026-01 对 xAI 的 $10B 投资经并购转换），6/30 市值 ~$21B，为其第二大已披露持仓", "<b>新：Musk 声明未来「exclusively on Nvidia」</b>，地面 DC 与轨道载荷单一供应商；路线图 2026 年底 2GW → 2027 年底「closer to 10GW than 5GW」，对照 Q2'26 实际 1.4GW", "Q2：收入 $7.8B（+92%），净亏 $541M；xAI capex $15.8B 占集团 $18.4B 的 86%（1.4GW 对应此数）", "Starlink 是集团唯一自筹资金的分部：Q2 capex $1.4B < 经营利润 $1.66B；AI 分部 2025 全年经营亏损 $6.35B", "股价 $148.41（9/9），较发行价 $135 为 +9.9%，从未破发；距 6 月高点 $225.64 −34%", "供给排期：9/24 约 328M、10/9、10/24，<b>11 月初随 Q3 财报触发 1.3B 股（4x 任何日历事件）</b>，12/8 为 180 天到期", "Google $920M/月合同：9/30 GPU 交付死线；基建负责人 Palmer 已离职、Macrohard 靠 100+ 台移动冷水机运行 — 交付风险从合同条款变成工程执行"] },
-    { name: "CoreWeave", cat: "Neocloud", score: 31, prev: 30,
+    { name: "CoreWeave", cat: "Neocloud", score: 31, prev: 31,
       flag: { text: "高杠杆未改善，市场信号改善", cls: "bad" },
-      facts: ["<b>新：股价 $92.90（9/11，随 ORCL +4%）</b>，自 9/3 低点 $81.75 累计 +13.6%，距 52 周高点 −39%（9/5 时为 −43%）", "<b>待核实：「30 日回撤 >25%」触发项在此价位已不明确成立</b> — 缺可验证日线序列，本期只减 1 分未撤销整个 +6", "债务结构本身无任何改善：净债务/aEBITDA 6.71x，新债票息 9.75%", "利率敏感：+100bp ≈ 年息 +$350M，对照经营利润指引 $960M–1.15B", "单季净亏 $1.48B（纪录）；capex $35–39B；净债务约 $30B @ 9.0%", "50–70% 收入来自 OpenAI；$21M 内部人减持"] },
+      facts: ["股价路径细化：9/10 收 $89.12（−6.13%，财报前观望+债务担忧），9/11 +3.55~4% 至 ~$92.3–92.9（随 ORCL 超预期及 MS 上调 ORCL 目标价外溢），自 9/3 低点 $81.75 累计 +13%，距 52 周高点 −39%", "<b>连续第二期挂起：「30 日回撤 >25%」无法裁决</b> — 9/3 记录的「近一月 −31.5%」参照的 8 月初高位已滚出 30 日窗口，缺 8/13–9/12 日线序列。Neocloud 分量 14 分中有 6 分挂在这条未验证触发线上，下期优先解决", "债务结构本身无任何改善：净债务/aEBITDA 6.71x，新债票息 9.75%", "利率敏感：+100bp ≈ 年息 +$350M，对照经营利润指引 $960M–1.15B", "单季净亏 $1.48B（纪录）；capex $35–39B；净债务约 $30B @ 9.0%", "50–70% 收入来自 OpenAI；$21M 内部人减持"] },
     { name: "Cerebras", cat: "芯片 / Neocloud", score: 38, prev: 38,
       flag: { text: "当期集中度尚可，远期 backlog 押在 OpenAI", cls: "warn" },
       facts: ["纠错：2026-05-14 已在 Nasdaq 上市（CBRS），发行价 $185，募 $5.55B，全稀释估值 $56.4B", "Q2：GAAP 收入 $180.1M（低于预期），GAAP 净亏 $450.5M（$386.6M 为股权激励）", "OpenAI 占当期收入 32%（低于 50–70% 基线）；但 $25.4B RPO 中 ~80% 来自 OpenAI，且 78% 两年后才确认", "现金及投资 ~$8.6B，无传统债务；OpenAI 2025-12 放贷 $1B 以认股权证担保", "股价 ~$203：距高点 −44%，较发行价 +10%；P/S ~117x"] },
@@ -197,7 +197,7 @@ const DATA = {
       facts: ["Azure +43% YoY，云分部年收入首破 $100B", "AI 收入年化 run-rate <b>>$37B（+123%）</b> — 这是「$51B 全行业 AI 收入」类口径不成立的直接反证", "$80B 订单因电力约束无法交付 = 需求真实", "AI 收入 70% 来自 OpenAI（>7% 总收入）", "OpenAI「增量 $250B」承诺 FY27 起兑现", "capex 口径并记：账本 ~$190B vs 新扫描的日历年 $175B「经会计调整后维持不变」— 差异非撤退信号"] },
     { name: "Vertex AI", cat: "Hyperscaler 平台", score: 52, prev: 52,
       flag: { text: "回收比在改善，但母公司 FCF 转负", cls: "warn" },
-      facts: ["纠错：Q2'26 云收入 <b>$24.8B（+82%）</b>，非账本原记的 $20B；较 Q1 的 63% 明显加速，超预期 $22.4B", "云分部经营利润 $8.8B（去年同期 $2.8B）；backlog <b>$514B</b>，非 $460B", "母公司 FCF 转负，2026 capex 指引 $195–205B", "为 Anthropic 5 个数据中心租约 backstop（~$35B 等效）— 循环融资敞口", "回收比在改善：需求侧无裂缝，支撑「Hyperscaler 撤退」分量维持 2/20 低位"] },
+      facts: ["纠错：Q2'26 云收入 <b>$24.8B（+82%）</b>，非账本原记的 $20B；较 Q1 的 63% 明显加速，超预期 $22.4B", "云分部经营利润 $8.8B（去年同期 $2.8B）；backlog <b>$514B</b>，非 $460B", "母公司 FCF 转负，2026 capex 指引 $195–205B", "为 Anthropic 5 个数据中心<b>租金</b> backstop — 结构已查清：Apollo+Blackstone $35B SPV 买 Google TPU 回租，Google 兜租金、Broadcom 兜 $30B 优先档残值（循环融资敞口）", "回收比在改善：需求侧无裂缝，支撑「Hyperscaler 撤退」分量维持 2/20 低位"] },
     { name: "Bedrock", cat: "Hyperscaler 平台", score: 45, prev: 45,
       flag: { text: "Anthropic 集中 + FCF 转负", cls: "warn" },
       facts: ["AWS $42.2B，+36.7% YoY — 连续第五季增速加快", "母公司 FCF 转负；2026 capex ~$200B", "对 Anthropic 投资累计 $40B，回流为 AWS 收入", "旗舰模型即 Claude，集中度实质高"] }
@@ -211,6 +211,9 @@ const DATA = {
     { date: "2026-02-11", company: "xAI (SpaceX)", who: "Shotwell / Nicolls / Johnsen", dir: "IN", sig: "🟡", read: "SpaceX 旧部 12 人接管 — 稳定运营但深化 Musk 单点风险", url: "https://www.kucoin.com/news/flash/elon-musk-reorganizes-xai-with-12-key-appointments-from-spacex-and-family-office" }
   ],
   events: [
+    { date: "2026-06-05", tag: "NEG", text: "<b>补记 · 第五例供应商信用换算力，结构最完整的一例</b>：Apollo + Blackstone 完成 <b>$35B 私募信贷</b>，经 SPV 购入 Google TPU 后回租给 Anthropic，设备与债务均不进 Anthropic 表内，对应约 +1GW。新披露的关键一环：三档中 <b>Senior A1 $6B 与 A2 $24B 由 Broadcom 提供残值担保与信用背书</b>，Google 另行 backstop 五个美国 DC 的租金支付。即：芯片的共同设计方替「买自家芯片的债务」兜底残值，另一方兜底租金，用款方是双方共同的客户兼被投企业。Broadcom CEO Hock Tan 称与 Apollo/Blackstone 共建「AI XPV Platform」，目标 2028 年前部署 >20GW。<b>与前四例（NVIDIA-OpenAI backstop、AMD-Anthropic $5B/2GW、OpenAI-Cerebras $1B vendor loan、NVIDIA-SpaceX $10B 股权+独家架构）的本质差别</b>：前四例是直接出资，本例把供应商信用做成了可交易私募信贷的增信条款 — 残值假设一旦被质疑（参照 IREN 8 月 $639M 矿机减值），受损的不止 Anthropic 一家，而是整条 $35B 债务的持有人", src: "Bloomberg / Crypto Briefing", url: "https://cryptobriefing.com/apollo-blackstone-anthropic-35b-debt-deal/" },
+    { date: "2026-09-12", tag: "NEU", text: "<b>口径冲突登记（不计分，但可能是最重要的一条）</b>：SoftBank 正在营销的第二笔 $10B OpenAI 股权质押贷款条款浮出 — 两年期，利差约 <b>SOFR+275bp</b>，同含「估值大跌须追加抵押或提前偿还」。账本 9/3 一手核实的首笔 $10B（8/6 关闭）为 <b>SOFR+425bp</b>，且靠 SoftBank 追加公司担保才从被砍的 $6B 恢复到 $10B。若两者可比，六周内针对同一抵押品的报价<b>收窄 150bp</b> — 与 9/15 提前还清过桥、Oracle 超预期构成本周期第三条「融资通道在开不在关」的证据，直接打在 Zitron 框架的「融资悬崖」主线上。但来源为二手聚合源、未标明档次与是否含公司担保，该笔亦未确认关闭 — 并记不计分，列为下期必查", src: "Outlook Business", url: "https://www.outlookbusiness.com/corporate/softbanks-openai-bet-triggers-fresh-10-bn-funding-push" },
+    { date: "2026-09-12", tag: "NEU", text: "Anthropic $15B pre-IPO 循环额度细化：是在原约 <b>$2.5B 基础上扩大 6 倍</b>，银团 17 家银行（MS 领衔，GS/JPM/Citi 主要角色），用途被明确表述为「保险」而非增长资本 — 对冲 IPO 静默期与算力账单撞车（对照约 $80B 已签约算力义务）。双向：6 倍扩额说明公司为「IPO 再推迟」做了准备；但 17 家银行愿意承做本身是通道通畅的证据。净额为零，不动分", src: "Bloomberg / Forbes", url: "https://www.forbes.com/sites/jonmarkman/2026/09/07/anthropic-delays-ipo-to-mid-october-locks-in-15-billion-credit-line/" },
     { date: "2026-09-10", tag: "POS", text: "<b>Oracle FQ1'27 实际结果全面超前瞻</b>：总收入 $19.3B（+30%），OCI $7.4B（<b>+121%</b>），云收入合计 $11.6B（+62%），non-GAAP EPS $1.92 超预期 $1.75。<b>RPO 升至 $664B</b>（同比 +$209B，高于前瞻的 $638B），驱动是 Q1 新签 >$30B AI 云合同、且公司明确表述「未动用 Oracle 额外资本」— 即非 vendor financing 结构。FY27 指引上调至收入至少 $90B（+34%）、EPS $8.10；公司口径「AI 训练与推理需求持续快于供给增长」。9/11 ORCL +7%，CRWV +4%、NBIS +4% 跟涨。含义：OpenAI 算力债务链上最大的公开对手方在最严检验点给出的是加速而非裂缝，且新增 backlog 不靠自身出资 — 这是账本里第一条与「股权换算力」方向相反的一手证据", src: "Oracle 8-K (SEC)", url: "https://www.sec.gov/Archives/edgar/data/0001341439/000119312526387905/orcl-ex99_1.htm" },
     { date: "2026-09-10", tag: "NEG", text: "<b>同一份财报的反面</b>：Oracle 单季经营现金流 $23.1B（+184%）仍不足以覆盖 $28.5B 单季 capex，<b>自由现金流 −$5.4B</b>；客户预付后净现金 capex $18.0B。FY27 capex 指引 $90–95B 毛额、净现金 ≤$70B — 对照前瞻的 FY26 FCF −$23.7B 与 FY27 约 $40B 再融资需求，是资本强度再上台阶而非收敛。且对 OpenAI $300B/5 年合同的交付节奏与可服务性<b>仍无任何单独指引</b>，RPO 的 36 个月转化假设无法被外部验证。ORCL 年内仍 −20%：股价涨是对增长的重估，不是对杠杆的松绑", src: "Investing.com", url: "https://www.investing.com/news/company-news/oracle-q1-fy2027-slides-cloud-infrastructure-surges-121-guides-90b-93CH-4897025" },
     { date: "2026-09-09", tag: "POS", text: "<b>SoftBank 将于 9/15 一次性还清 $40B 过桥贷款的全部未偿余额 $25.9B</b>，较 2027-03 到期提前约六个月，并拟以 $10–20B 高收益债（美元为主、可能含欧元）再融资，下周在纽约开投资人会议；公司口径「早做完，避免任何 drama」。直接终结账本 E007 的状态：到期墙与「OpenAI 估值下跌触发 covenant 提前偿还」的反身性路径被主动拆除。但敞口同时从银团无抵押过桥迁移到公开 junk bond 市场 — OpenAI 融资链的下一个定价点变成高收益债市场对 AI 信用的胃口", src: "Bloomberg / Spokesman-Review", url: "https://www.spokesman.com/stories/2026/sep/09/softbank-to-repay-40-billion-bridge-loan-for-opena/" },
@@ -218,12 +221,9 @@ const DATA = {
     { date: "2026-09-05", tag: "NEG", text: "Anthropic IPO 时间表整体后移：公开 S-1 从 9/7 当周推迟至 9 月下旬，roadshow ≥10 月中，挂牌目标 11 月中期选举前数日；口径是先关闭 $15B 循环信贷额度再开分析师会 — 债务额度排在股权定价之前", src: "Value Add Pulse", url: "https://valueaddvc.com/pulse/anthropic-ipo-timeline-shifts-mid-october-2026" },
     { date: "2026-09-04", tag: "NEU", text: "潜在 IPO 投资人向 Anthropic 索要 revenue per token / revenue per gigawatt 等单位经济指标 — 买方开始按算力单位定价，公开 S-1 若不给这些数字会被折价", src: "Crypto Briefing / The Information", url: "https://cryptobriefing.com/anthropic-ipo-investors-seek-detailed-financial-metrics-amid-transparency/" },
     { date: "2026-09-02", tag: "NEG", text: "SpaceXAI 基建团队在 Google 9/30 死线前出现裂缝：基建负责人 Jake Palmer 7 月下旬离职、多位 DC 高管同期离开；Macrohard 靠 100+ 台移动冷水机运行，可用性远低于 99.9% 目标，训练多次中断；41 台永久燃气轮机延期 — 交付风险从合同条款变成工程执行", src: "Benzinga / The Information", url: "https://finance.yahoo.com/technology/ai/articles/spacex-ai-buildout-shows-cracks-184838938.html" },
-    { date: "2026-09-04", tag: "NEG", text: "Google 按 $920M/月（~$11B/年）购买 xAI 算力，但 SpaceX 面临 2026-09-30 GPU 交付死线 — 未按期交付 Google 可立即终止合同；与 Anthropic $40B+ 合同的 90 天终止条款同类，backlog 不可按面值计价", src: "Motley Fool", url: "https://www.fool.com/investing/2026/09/04/spacex-spent-184-billion-in-a-single-quarter-158-b/" },
-    { date: "2026-09-04", tag: "NEG", text: "2026 年内已有 $130B 的 AI 数据中心项目被阻止或延期；约束从资本转为电力与设备（变压器/开关柜/燃气轮机短缺，新项目延期 24–72 个月）— 压制 capex 兑现速度，同时延后减值时钟", src: "PR Newswire", url: "https://www.prnewswire.com/news-releases/130-billion-in-ai-data-centers-have-been-blocked-or-delayed-in-2026-302821568.html" },
-    { date: "2026-09-04", tag: "NEG", text: "Anthropic 通过 SPV 结构承担的芯片租赁债务约 $71B 浮出 — 表外/准表外杠杆，与账面「季度调整后经营利润转正」是两条独立的线", src: "GraniteShares", url: "https://graniteshares.com/research/anthropic-ipo-2026-explained-from-965-billion-to-a-possible-2-trillion-listing/" },
   ],
   calendar: [
-    { date: "2026-09-15", text: "SoftBank $25.9B 过桥还款日，其后一周在纽约开 $10–20B 高收益债投资人会议 — AI 融资链第一次把定价权交给公开 junk bond 市场，是框架「信贷市场对数据中心债务定价恶化」触发项第一个直接可观测的读数", hot: true },
+    { date: "2026-09-15（3 天后）", text: "SoftBank $25.9B 过桥还款日，其后一周在纽约开 $10–20B 高收益债投资人会议 — AI 融资链第一次把定价权交给公开 junk bond 市场，是框架「信贷市场对数据中心债务定价恶化」触发项第一个直接可观测的读数。<b>同一窗口须一并验证：第二笔 $10B OpenAI 质押贷款的最终利差是 SOFR+275bp 还是回到 425bp 量级</b>", hot: true },
     { date: "2026-09-24", text: "SpaceX 解禁约 328M 股（第四批日历解禁）", hot: false },
     { date: "2026-09 下旬", text: "Anthropic 公开递交 S-1（自 9/7 推迟；前置条件：$15B 循环信贷额度关闭）→ roadshow ≥10 月中 → 挂牌目标 11 月中期选举前", hot: true },
     { date: "2026-09-30", text: "SpaceX 对 Google 的 GPU 交付死线 — 未达标 Google 可终止或按比例减付 $920M/月合同；基建团队已现裂缝", hot: true },
